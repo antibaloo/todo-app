@@ -7,6 +7,8 @@ import (
 	"todo-app/pkg/repository"
 	"todo-app/pkg/service"
 
+	_ "github.com/lib/pq"
+
 	"github.com/spf13/viper"
 )
 
@@ -16,16 +18,18 @@ func main() {
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
-		Host:     "lacalhost",
+		Host:     "localhost",
 		Port:     "5432",
 		User:     "postgres",
 		Password: "postgres",
 		DBName:   "postgres",
 		SSLMode:  "disable",
 	})
+
 	if err != nil {
 		log.Fatalf("failed to initialize db: %s", err.Error())
 	}
+
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
