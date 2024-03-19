@@ -5,4 +5,4 @@ db:
   user:     "postgres"
   password: "postgres"
   dbname:   "postgres"
-  ssmode:   "disable"
+  sslmode:   "disable"
